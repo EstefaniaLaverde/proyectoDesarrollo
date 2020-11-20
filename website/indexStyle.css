@@ -1,18 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Aleo');
+
 body{
     margin: 0%;
     padding: 0%;
-}
-
-.pag-container{
-    display: grid;
-    grid-template-areas:
-    "hdr hdr"
-    "bdy bdy"
-    "helptxt helpimg1"
-    "helpimg2 helptxt"
-    "abt-us abt-us"
-    "ftr ftr"
-    ;
     /* aqui hacer el degradado */
     background: linear-gradient(#3138FF,#5D0FCE 60%,#6904C1);
     background-repeat: repeat-x;
@@ -21,11 +11,30 @@ body{
     height: 100%;
 }
 
+a:link {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.pag-container{
+    display: grid;
+    grid-template-areas:
+    "hdr"
+    "bdy"
+    "description"
+    "abt-us"
+    "ftr"
+    ;
+}
+
 /* hdr */
 .header-container{
     display: grid;
-    grid-template-columns: auto auto auto;
-    align-content: center;
+    grid-template-columns: 33vw 33vw 33vw;
+    place-content: center;
     place-items: center;
     background-color:rgba(255, 255, 255, 0.4);    
     top: 0;
@@ -43,6 +52,7 @@ body{
     border-radius: 30px;
     height: 5vh;
     width: 7vw;
+    font-weight: bold;
 }
 
 .drop-btn:hover, .drop-btn:focus {
@@ -53,6 +63,7 @@ body{
 .menu-container {
     position: relative;
     display: inline-block;
+    text-align: center;
 }
 
 .menu-content {
@@ -81,21 +92,25 @@ body{
 }
 
 #app-name{
+    text-align: center;
     font-size: 2rem;
     color: white;
 }
 
 .access-container {
-    display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 30%;
+    text-align: right;
     font-size: 1.5rem;
 }
 
+.access-container a{
+    color:white;
+    font-weight: bold;
+    padding-right: 2vw;
+}
 
 
 /* bdy */
-.image-container{
+.body-container{
     display: grid;
     grid-template-rows: 30% 0% auto;
     position: relative;
@@ -104,7 +119,7 @@ body{
     grid-area: "bdy";
 }
 
-.image-container::before{
+.body-container::before{
     content: "";
     position:absolute;
     background-image: url('fotos/to_do.jpg');
@@ -133,27 +148,100 @@ body{
     font-size: 4rem;
 }
 
-/* helptxt */
-.help-text{
-    grid-area: "helptxt";
+.description-section {
+    grid-area: "description";
+    display: grid;
+    grid-template-areas: 
+    "helptxt1 helpimg1 helpimg1"
+    "helpimg2 helpimg2 helptxt2";
+    row-gap: 20vh;
+    padding: 10vh 3vh 3vh 3vh;
+    place-items: center;
+}
+
+/* helptxt2 */
+.help-text1{
+    grid-area: helptxt1;
+    font-weight: bolder;
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    font-family: 'Aleo';
 }
 
 /* helpimg1 */
 .calendar-image{
-    grid-area: "helpimg1":
+    grid-area: helpimg1;
+    background-image: url('fotos/calendar.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 70vh;
+    width: 55vw;
 }
 
 /* helpimg2 */
 .category-image{
-    grid-area: "helpimg2";
+    grid-area: helpimg2;
+    background-image: url('fotos/category.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 70vh;
+    width: 55vw;
 }
+
+/* helptxt2 */
+.help-text2{
+    grid-area: helptxt2;
+    font-weight: bolder;
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    font-family: 'Aleo';
+}
+
+
+
 
 /* abt-us */ 
 .aboutus-container{
     grid-area: "abt-us";
+    padding-left: 3vw;
+    padding-bottom: 5vh;
+    color: white;
+}
+
+.aboutus-container h1{
+    font-size: 3rem;
+}
+
+.aboutus-container p {
+    font-size: 1.5rem;
+    margin-right: 7vw;
+    margin-left: 1vw;
 }
 
 /* ftr */
 .footer-container{
-    grid-area: "ftr"
+    grid-area: "ftr";
+    padding-top: 5vh;
+    padding-left: 3vw;
+    height: 40vh;
+    background-color: rgba(255, 255, 255, 0.4);
+    color: white;
+}
+
+.footer-container h1 {
+    font-size: 3rem;
+}
+
+.footer-container h2 {
+    font-size: 2rem;
+    margin-left: 2vw;
+}
+
+.footer-container dl {
+    font-size: 1.2rem;
+    margin-left: 3vw;
 }

@@ -4,38 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tareafy</title>
+    <!-- Nuestro archivo de estilos -->
     <link rel="stylesheet" href="indexStyle.css">
 </head>
 <body>
     <div class = "pag-container">
-        <div class="header-container">
+        <div class="header-container" id="body-section">
             <div class = "menu-container">
                 <button class = "drop-btn" onclick="menuFunction()">Menú</button>
                 <div class = "menu-content" id = "menu-content">
-                    <a href="#">Inicio</a>
-                    <a href="#">A cerca de nosotros</a>
-                    <a href="#">Contactanos</a>
+                    <a href="#body-section">Inicio</a>
+                    <a href="#description-section">Sobre la app</a>
+                    <a href="#aboutus-section">Sobre nosotros</a>
+                    <a href="#footer">Contactanos</a>
                 </div>
             </div>
             <div id="app-name">TAREAFY</div>
             <div class="access-container">
-                <div class = "login"><a href="">LOGIN</a></div>
-                <div class = "singup"><a href="">SINGUP</a></div>                
+                <a href="">LOG IN</a> <a href="">SING UP</a>
             </div>
         </div>
-        <div class = "image-container">
+        <div class = "body-container">
             <p class = "welcome-text" id = "p0"><b>No vuelvas a olvidar tus deberes</b></p>
             <p class = "welcome-text" id = "p1">Organízalo todo en una lista</p>
             <p class = "welcome-text" id = "p2">¡Organízate con Tareafy!</p>
         </div>
     </div>
-
-    <div class = "help-text"></div>
-    <div class = "calendar-image"></div>
-    <div class = "help-text"></div>
-    <div class = "category-image"></div>
-    <div class = "aboutus-container"></div>
-    <div class = "footer-container"></div>
+    <div class = "description-section" id = "description-section">
+        <div class = "help-text1">Organiza todas tus tareas en un calendario</div>
+        <div class = "calendar-image"></div>
+        <div class = "category-image"></div>
+        <div class = "help-text2">Revisalas por categoría y no vuelvas a perder tu tiempo</div>
+    </div>
+    <div class = "aboutus-container" id = "aboutus-section">
+        <h1>Acerca de nosotros</h1>
+        <p>
+            Somos Juan Luis Ávila, Estefanía Laverde y Emanuel Naval, estudiantes de
+            Matemáticas Aplicadas y Ciencias de la Computación en la Universidad del Rosario
+            en Bogotá, Colombia.<br>
+            Esta web y su respectiva app hacen parte del proyecto final de la asignatura
+            Desarrollo Web. Nuestro objetivo al hacer esta aplicación es el de facilitar
+            a las personas la organización de sus actividades, sean cotidianas, laborales
+            o de cualquier otro tipo, de forma eficaz y sencilla.
+        </p>
+    </div>
+    <div class = "footer-container" id = "footer">
+        <h1>Contactos</h1>
+        <h2>Instagram:</h2>
+        <dl>
+            <p>
+                Juan Luis Ávila: <a href="https://www.instagram.com/jlam217/">@jlam217</a>
+            </p>
+        </dl>
+        <dl>
+            <p>
+                Estefanía Laverde: <a href="https://www.instagram.com/elaverde.2001/">@elaverde.2001</a>
+            </p>
+        </dl>
+        <dl>
+            <p>
+                Emanuel Naval: <a href="https://www.instagram.com/emanuel_naval/">@emanuel_naval</a>
+            </p>
+        </dl>
+    </div>
 
     <script src="indexScript.js"></script>
 </body>
