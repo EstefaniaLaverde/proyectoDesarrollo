@@ -1,6 +1,18 @@
 body{
     margin: 0%;
     padding: 0%;
+}
+
+.pag-container{
+    display: grid;
+    grid-template-areas:
+    "hdr hdr"
+    "bdy bdy"
+    "helptxt helpimg1"
+    "helpimg2 helptxt"
+    "abt-us abt-us"
+    "ftr ftr"
+    ;
     /* aqui hacer el degradado */
     background: linear-gradient(#3138FF,#5D0FCE 60%,#6904C1);
     background-repeat: repeat-x;
@@ -8,21 +20,140 @@ body{
     width: 100%;
     height: 100%;
 }
-.contenidoFoto{
-    background-image: url('fotos/to_do.jpg');
-    background-size: 100vh;
-    position: relative;
-    height: 100vh;
-    background-repeat: no-repeat;
-}
-.barraPrincipal{
+
+/* hdr */
+.header-container{
     display: grid;
     grid-template-columns: auto auto auto;
-    background-color: white;
-    opacity: 90%;
-    z-index: 1000000000;
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
+    align-content: center;
+    place-items: center;
+    background-color:rgba(255, 255, 255, 0.4);    
     top: 0;
-    font-family: Ebrima;
+    height: 10vh;
+    grid-area: "hdr";
+}
+
+.drop-btn{
+    background-color: white;
+    text-shadow: 0.5rem;
+    color: rgb(122, 62, 122);
+    font-size: 1.3rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    height: 5vh;
+    width: 7vw;
+}
+
+.drop-btn:hover, .drop-btn:focus {
+    background-color: rgb(122, 62, 122);
+    color:white;
+}
+
+.menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.menu-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.menu-content a:hover{
+    background-color: grey;
+}
+
+/* se agrega con js */
+.show {
+    display: block;
+}
+
+#app-name{
+    font-size: 2rem;
+    color: white;
+}
+
+.access-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 30%;
+    font-size: 1.5rem;
+}
+
+
+
+/* bdy */
+.image-container{
+    display: grid;
+    grid-template-rows: 30% 0% auto;
+    position: relative;
+    place-items: center;
+    height: 90vh;
+    grid-area: "bdy";
+}
+
+.image-container::before{
+    content: "";
+    position:absolute;
+    background-image: url('fotos/to_do.jpg');
+    background-size: cover;    
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.25;
+}
+
+.welcome-text{
+    position: relative;
+    color: white;
+}
+
+#p0 {
+    font-size: 2.5rem;
+}
+
+#p1 {
+    font-size: 2rem;
+}
+
+#p2 {
+    font-size: 4rem;
+}
+
+/* helptxt */
+.help-text{
+    grid-area: "helptxt";
+}
+
+/* helpimg1 */
+.calendar-image{
+    grid-area: "helpimg1":
+}
+
+/* helpimg2 */
+.category-image{
+    grid-area: "helpimg2";
+}
+
+/* abt-us */ 
+.aboutus-container{
+    grid-area: "abt-us";
+}
+
+/* ftr */
+.footer-container{
+    grid-area: "ftr"
 }
