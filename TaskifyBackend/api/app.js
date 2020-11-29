@@ -6,6 +6,7 @@ let app = express() // Cargar el framework de express para hacer las conexiones 
 
 // Cargar rutas
 let user_routes = require('../api/routes/user');
+let tag_routes = require('../api/routes/tag');
 
 // Middelwares
 app.use(bodyParser.urlencoded({extended:false}));
@@ -15,5 +16,6 @@ app.use(bodyParser.json());
 
 // rutas
 app.use('/api', user_routes);
+app.use('/api', tag_routes);
 
 module.exports = app;
