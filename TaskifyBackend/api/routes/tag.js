@@ -8,9 +8,9 @@ let mid_auth = require('../middlewares/auth');
 let api = express.Router();
 
 
-api.post('/create/:id', mid_auth.validateAuth, TagController.saveTag);
+api.post('/createTag/:id', mid_auth.validateAuth, TagController.saveTag);
 // DIFERENCIAS ENTRE GET, POST, PUT ... 
-api.put('/remove/:id', mid_auth.validateAuth, TagController.removeTag);
-api.put('/update-color/:id', mid_auth.validateAuth, TagController.updateColor);
+api.put('/removeTag/:id', mid_auth.validateAuth, TagController.removeTag);
+api.put('/update-color-tag/:id', mid_auth.validateAuth, TagController.updateColor);
 
 module.exports = api;
