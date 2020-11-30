@@ -6,7 +6,8 @@ let Schema = mongoose.Schema;
 
 let TagSchema = Schema({
     name: String,
-    color:String
+    color:String,
+    user: {type: Schema.ObjectId, ref: 'User'},
 })
 
 module.exports = mongoose.model('Tag', TagSchema);

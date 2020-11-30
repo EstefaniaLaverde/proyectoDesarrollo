@@ -4,7 +4,7 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let DaySchema = Schema({
-    tasks:  {type: Schema.ObjectId, ref: 'Task'}
+    date: String
 })
 
 module.exports = mongoose.model('Day', DaySchema);

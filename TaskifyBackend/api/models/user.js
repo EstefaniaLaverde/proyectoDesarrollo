@@ -8,8 +8,7 @@ let UserSchema = Schema({
     name: String,
     lastName: String,
     email: String,
-    password: String,
-    tasks:{type: Schema.ObjectId, ref: 'Task'}
+    password: String
 })
 
 module.exports = mongoose.model("User", UserSchema);
