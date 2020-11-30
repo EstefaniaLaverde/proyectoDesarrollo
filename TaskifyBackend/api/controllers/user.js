@@ -60,12 +60,12 @@ function saveUser(req, res){
                             })
                         }
                         if(userStored){
-                            res.status(200).send({
+                            return res.status(200).send({
                                 message: 'El usuario fue almacenado correctamente',
                                 user: userStored //para que no se guarde todo podemos devolver la informacion del usuario que necesitemos
                             })
                         }else{
-                            res.status(404).send({
+                            return res.status(404).send({
                                 message: 'El usuario no pudo ser almacenado correctamente'
                             })
                         }
@@ -76,7 +76,7 @@ function saveUser(req, res){
         })   
     }else{
         res.status(200).send({
-            message: "No se enviaron todos los campos"
+            message: "No se enviaron todos los campos. Debería haber nombre, apellido, correo y contraseña"
         })
     }
 }
@@ -167,7 +167,7 @@ function getUsers(req,res) {
         return res.status(200).send({
             users,
             total,
-            pages: Math.ceil(total/docsPerPage)
+            pages: Math.ceil(total/docsPerPage) //esto no me estaba funcionando help
         })
     })
 }

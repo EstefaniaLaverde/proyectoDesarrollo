@@ -14,7 +14,7 @@ function saveTag(req, res){
     let tag = new Tag();
     // Revisamos que se envíe el nombre del tag
     if (params.name){
-        tag.name = params.name;
+        tag.name = params.name.toLowerCase();
         // Le damos un color aleatorio al tag
         var randomColor = Math.floor(Math.random()*16777215).toString(16);
         tag.color = '#' + randomColor;
@@ -31,41 +31,78 @@ function saveTag(req, res){
                 return res.status(200).send({
                     message: "Ya existe un tag con ese nombre."
                 })
+            }else{
+                tag.save((err,tagStored)=>{
+                    if(err) {
+                        return res.status(500).send({
+                            message: 'Error al guardar el tag'
+                        })
+                    }
+                    if(tagStored){
+                        return res.status(200).send({
+                            message: 'El tag fue almacenado correctamente',
+                            tag: tagStored //para que no se guarde todo podemos devolver la informacion del usuario que necesitemos
+                        })
+                    }else{
+                        return res.status(404).send({
+                            message: 'El tag no pudo ser almacenado correctamente'
+                        })
+                    }
+                })
             }
         })
-
-        return res.status(200).send({
-            message: "El tag fue guardado exitosamente."
-        })
-
+        
     }else{
         return res.status(200).send({message : "¡Enviar el nombre del tag!"})
     }
 }
 
 function removeTag(req, res){
-    let tagId = req.params.id;
+    // let tagId = req.params.id;
+    // console.log(tagId)
     let tagRemove = req.body;
-    // Revisamos que envíe el nombre del tag a eliminar
-    if (tagRemove.name){ // DUDASS!!!
-        Tag.findByIdAndRemove(tagId, (err, tagR) => {
+    console.log(tagRemove)
+    let tagId = tagRemove.id;
 
-            if (err){
+    // Revisamos que envíe el nombre del tag a eliminar
+    if (tagId){ // DUDASS!!!
+        Tag.findByIdAndDelete(tagId, (err, tagRemove)=>{
+            if (err) {
                 return res.status(500).send({
                     messsage : "Error en la eliminación."
                 })
-            }
-
-            if (!tagR){ // ¿O tagRemove?
+            }if (!tagRemove) {
                 return res.status(500).send({
-                    message: "No se envió el nombre del tag a eliminar"
+                    message: "No se encontró el tag."
+                })
+            }else{
+                return res.status(200).send({
+                    message:'El tag fue eliminado correctamente.'
                 })
             }
+        })
+    //     Tag.findByIdAndRemove(tagId, (err, tagR) => {
 
-            return res.status(200).send({
-                message: "El tag fue eliminado exitosamente",
-                tagR
-            })
+    //         if (err){
+    //             return res.status(500).send({
+    //                 messsage : "Error en la eliminación."
+    //             })
+    //         }
+
+    //         if (!tagR){ // ¿O tagRemove?
+    //             return res.status(500).send({
+    //                 message: "No se envió el nombre del tag a eliminar"
+    //             })
+    //         }
+
+    //         return res.status(200).send({
+    //             message: "El tag fue eliminado exitosamente",
+    //             tagR
+    //         })
+    //     })
+    }else{
+        return res.status(500).send({
+            messsage : "No se envió el nombre del tag."
         })
     }
 }
