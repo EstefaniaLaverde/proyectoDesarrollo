@@ -8,7 +8,6 @@ let mid_auth = require('../middlewares/auth');
 let api = express.Router() // Aquí están todos los métodos con los que nosotros podemos hacer cualquier tipo de peticiones get/post/patch...
 
 api.get('/home', UserController.home);
-// api.get('/pruebas', mid_auth.validateAuth, UserController.pruebas); No lo necesitamos (creo)
 api.post('/register', UserController.saveUser);
 api.post('/login', UserController.loginUsers);
 //Traer informacion de un usuario con un id específico

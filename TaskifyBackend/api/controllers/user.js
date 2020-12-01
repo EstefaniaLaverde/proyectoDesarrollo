@@ -29,7 +29,6 @@ function saveUser(req, res){
         user.lastName = params.lastName
         user.email = params.email;
         user.password = params.password
-        user.tasks = null; //Aún no guardaremos tasks
 
 
         //Autenticación 
@@ -39,7 +38,7 @@ function saveUser(req, res){
             
             if (err){
                 return users.status(500).send(
-                    {message: 'Hubo un error en la peticion'}
+                    {message: 'Hubo un error en la petición.'}
                 )}
             if (users && users.length >=1) { //si existen los usuarios y son >=1
                 return res.status(200).send({
@@ -82,9 +81,8 @@ function saveUser(req, res){
 }
 
 //Login de usuarios
-function loginUsers(req,res) {
+function loginUsers(req,res) { //POST
     let params = req.body;
-    //console.log(params)
     let email = params.email;
     let password = params.password;
 
@@ -181,7 +179,7 @@ function updateUser(req, res) { //Para poder cambiar por ejemplo el nombre
 
     delete userUpdate.password; //Que no se pueda cambiar la contraseña
 
-    if (userId != req.user.sub) {
+    if (userId != req.user.sub) { //Si el usuario de los parámetos no es el mismo que está logeado
         return res.status(500).send({message:'El usuario no tiene permisos para modificar este usuario'})
     }
 

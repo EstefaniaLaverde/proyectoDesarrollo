@@ -11,6 +11,9 @@ let api = express.Router();
 api.post('/createTag/:id', mid_auth.validateAuth, TagController.saveTag);
 // DIFERENCIAS ENTRE GET, POST, PUT ... 
 api.put('/removeTag/:id', mid_auth.validateAuth, TagController.removeTag);
-api.put('/update-color-tag/:id', mid_auth.validateAuth, TagController.updateColor);
+api.put('/update-tag/:id', mid_auth.validateAuth, TagController.updateTagColor);
+api.get('/tags/:page?', mid_auth.validateAuth, TagController.getTags);
+
+
 
 module.exports = api;
