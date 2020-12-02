@@ -27,8 +27,7 @@ a:hover {
     "bdy"
     "description"
     "abt-us"
-    "ftr"
-    ;
+    "ftr";
 }
 
 /* hdr */
@@ -37,11 +36,17 @@ a:hover {
     grid-template-columns: 33vw 33vw 33vw;
     place-content: center;
     place-items: center;
-    background-color:rgba(255, 255, 255, 0.4);    
+    background-color:rgba(255, 255, 255, 0.4);
     top: 0;
     height: 10vh;
     grid-area: "hdr";
 }
+/* Para la barra de navegación sticky */
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
 
 .drop-btn{
     background-color: white;

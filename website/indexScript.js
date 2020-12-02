@@ -11,3 +11,17 @@ window.onclick = function(event) {
         }
     }
 }
+
+window.onscroll = function() {stickyBar()};
+
+var header = document.getElementById("header-section");
+
+var sticky = header.offsetTop;
+
+function stickyBar(){
+    if (window.pageYOffset >= sticky){
+        header.classList.add('sticky');
+    }else{
+        navbar.classList.remove('sticky');
+    }
+}
