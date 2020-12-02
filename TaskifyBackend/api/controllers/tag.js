@@ -17,14 +17,15 @@ function saveTag(req, res){
     let userId = req.params.id;
     let params = req.body;
     let tag = new Tag();
+    let nombreTag = params.name;
     
     if (userId !=req.user.sub) { //Si no coincide el id del usuario al que equeremos añadirle un tag
         console.log(userId,'el de jwt: ',req.user.sub)
         return res.status(500).send({message:'No tiene permisos para modificar los tags de este usuario'})
     }
     else{ //Si si coincide
-        if (params.name && userId){
-            tag.name = params.name.toLowerCase();
+        if (nombreTag && userId){
+            tag.name = nombreTag.toLowerCase();
             tag.user = userId;
             // Le damos un color aleatorio al tag si no se da uno
             var randomColor = Math.floor(Math.random()*16777215).toString(16);
@@ -80,7 +81,7 @@ function removeTag(req, res){
     }
     let userId = req.params.id;
     let tagRemove = req.body; 
-    let tagRemoveName = tagRemove.name//Lo vamos a buscar por nombre
+    let tagRemoveName = tagRemove.name.toLowerCase();//Lo vamos a buscar por nombre
     
     if (userId !=req.user.sub) { //Si no coincide el id del usuario al que equeremos añadirle un tag
         console.log(userId,'el de jwt: ',req.user.sub)
@@ -158,7 +159,7 @@ function getTags(req,res) { //El paginate no funciona del todo
     if (req.params.page) {
         page = req.params.page
     }
-    let docsPerPage = 5;
+    let docsPerPage = 2;
 
     Tag.find().sort('_id').paginate(page, docsPerPage, (err, tags, total)=>{
 

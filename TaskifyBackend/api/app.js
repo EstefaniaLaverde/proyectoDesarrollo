@@ -7,7 +7,7 @@ let app = express() // Cargar el framework de express para hacer las conexiones 
 // Cargar rutas
 let user_routes = require('../api/routes/user');
 let tag_routes = require('../api/routes/tag');
-let task_routes = require('../api/routes/tag')
+let task_routes = require('../api/routes/task');
 
 // let project_routes = [
 //     user_routes,

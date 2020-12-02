@@ -9,8 +9,8 @@ let TaskSchema = Schema({
     description: String,
     creation_date: String,
     // due_date: String,
-    due_date: {type: Schema.ObjectId, ref: 'Day'},
-    status: Boolean //Si la tarea ya se realizó o no
+    due_date: String,
+    status: Boolean, //Si la tarea ya se realizó o no
 })
 
 module.exports = mongoose.model('Task', TaskSchema);
