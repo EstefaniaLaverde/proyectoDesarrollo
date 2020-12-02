@@ -76,7 +76,7 @@ function saveTag(req, res){
 }
 
 function removeTag(req, res){
-    if (!req.params.id) {//Si no se envia el usuario al que crearle el task
+    if (!req.params.id) {//Si no se envia el usuario al que crearle el tag
         return res.status(500).send({message: 'no se envió el id del usuario'})
     }
     let userId = req.params.id;

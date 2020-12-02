@@ -32,42 +32,42 @@ function createTask(req, res){
                     // newTag = tagControllers.saveTag(req, res);
                     // tagToSave = newTag.tag;
                     // console.log(tagToSave); 
-                }else{
-                    task.tag = foundTag;
                 }
-            })
-            task.description = params.description;
-            task.creation_date = moment().unix();
-            // console.log(moment.unix().toDate());
-            task.status = false;
-            //  task.due_date = moment().unix(); //Por defecto, due_date = creation_date
-            if (params.due_date){
-                task.due_date = params.due_date;
-            }else{
-                task.due_date = moment().unix(); //Por defecto, due_date = creation_date
-            }
-            
+                task.tag = foundTag.id;
 
-            //Guardando el nuevo task
-            task.save((err, taskStore) => {
-                if (err) {
-                    return res.status(500).send({
-                        message: "Error al guardar la tarea."
-                    })
-                }
-                if(taskStore){
-                    // return res.status(200).save({  // ESTA LINEA PUEDE QUE SEA LA DEL ERROR
-                    return res.status(200).send({
-                        message: "La tarea fue guardada correctamente",
-                        task: taskStore
-                    })
+                //___
+                task.description = params.description;
+                task.creation_date = moment().unix();
+                // console.log(moment.unix().toDate());
+                task.status = false;
+                //  task.due_date = moment().unix(); //Por defecto, due_date = creation_date
+                if (params.due_date){
+                    task.due_date = params.due_date;
                 }else{
-                    return res.status(404).send({
-                        message: "La tarea no pudo ser almacenada."
-                    })
+                    task.due_date = moment().unix(); //Por defecto, due_date = creation_date
                 }
-            })
+                
+                console.log(task);
 
+                task.save((err, taskStore) => {
+                    if (err) {
+                        return res.status(500).send({
+                            message: "Error al guardar la tarea."
+                        })
+                    }
+                    if(taskStore){
+                        // return res.status(200).save({  // ESTA LINEA PUEDE QUE SEA LA DEL ERROR
+                        return res.status(200).send({
+                            message: "La tarea fue guardada correctamente",
+                            task: taskStore
+                        })
+                    }else{
+                        return res.status(404).send({
+                            message: "La tarea no pudo ser almacenada."
+                        })
+                    }
+                })
+            })
         }else{
             return res.status(200).send({
                 message: "No se enviaron todos los campos necesarios."
@@ -76,9 +76,35 @@ function createTask(req, res){
     }
 }
 
-// function removeTask(req,res) {
-    
-// }
+function removeTask(req,res) {
+    if (!req.params.id) {//Si no se envia el usuario al que crearle el task
+        return res.status(500).send({message: 'no se envió el id del usuario'})
+    }
+    let userId = req.params.id;
+    let taskRemove = req.body;
+    let taskRemoveId = taskRemove.id;//Lo vamos a buscar por id
+    if (userId !=req.user.sub) { //Si no coincide el id del usuario al que equeremos añadirle un task
+        console.log(userId,'el de jwt: ',req.user.sub)
+        return res.status(500).send({message:'No tiene permisos para modificar los task de este usuario'})
+    }else{
+        if (!taskRemoveId) {
+            return res.status(500).send({
+                messsage : "No se envió el id del task."
+            })
+        }
+        Task.findByIdAndRemove(taskRemoveId, (err, taskToRemove)=>{
+            if (err) {
+                return res.status(500).send({
+                    messsage : "No se encontró la Task deseada."
+                })
+            }else{
+                return res.status(200).send({
+                    message : "El task '"+ taskToRemove.description +"' fue removido correctamente."
+                })
+            }
+        })
+    }
+}
 
 function updateTask(req,res) {
     if (!req.params.id) {//Si no se envia el usuario al que crearle el task
@@ -111,9 +137,57 @@ function updateTask(req,res) {
     
 }
 
+function findByTag(req,res) {
+    if (!req.params.id) {//Si no se envia el usuario al que crearle el tag
+        return res.status(500).send({message: 'no se envió el id del usuario'})
+    }
+    let userId = req.params.id;
+    console.log(req.body)
+    let tagToFind = req.body.name; //En el body se envia el nombre de un tag
+    console.log("TAGTOFIND: ",tagToFind)
+    let tagId = '';
+
+    if (userId!=req.user.sub) {
+        return res.status(500).send({message:'No tiene permisos para modificar los tags de este usuario'})
+    } else {
+        if(!tagToFind){
+            return res.status(500).send({message:'No envió el nombre del tag para buscar las tareas asociadas'})
+        }else{
+            Tag.findOne({name: tagToFind.toLowerCase(), user:userId}, (err,foundTag)=>{
+                if (err) {
+                    return res.status(500).send({message:'Hubo un error obteniendo el id del tag'})
+                }
+                if(!foundTag){
+                    return res.status(500).send({message:'No se encontró el tag con ese nombre para su usuario'})
+                }else{
+                    tagId = foundTag.id;
+                    console.log(tagId)
+                    Task.find({tag: tagId},(err, tasks)=>{
+                        if (err) {
+                            return res.status(500).send({message:'Hubo un error obteniendo las tareas'})
+
+                        }if (!tasks) {
+                            return res.status(500).send({message:'No se encontraron tareas con ese tag'})
+                        }else{
+                            return res.status(200).send({
+                                message:'Estas son todas las tareas del tag '+foundTag.name+' para su usuario',
+                                Tasks: tasks,
+                                total: tasks.length
+                            })
+                        }
+                    })
+                }
+            })
+        }
+        
+    }
+}
+
 
 
 module.exports = {
     createTask,
-    updateTask
+    updateTask,
+    removeTask,
+    findByTag
 }
